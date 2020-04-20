@@ -1,0 +1,15 @@
+{
+  "name": "todo-postgresql",
+  "version": "1.0.0",
+  "description": "Creating ubntu TOdo app using Postgresql, express and node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ravindra Kumar Kumawat",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.0.2"
+  }
+}
