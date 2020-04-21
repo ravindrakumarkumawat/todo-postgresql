@@ -1,20 +1,42 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
+const { pool } = require('./config')
 
 const app = express()
 
 app.use(bodyParser.json())
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+
+const getBooks = (request, response) => {
+  pool.query('SELECT * FROM books', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
   })
-)
+}
 
-app.get('/', (request, response) => {
-    response.json({ info: 'Node.js, Express, and Postgres API' })
-})
+const addBook = (request, response) => {
+  const { author, title } = request.body
 
-const port = 3000
-app.listen(port, () => {
-    console.log(`App running on port ${port}.`)
+  pool.query('INSERT INTO books (author, title) VALUES ($1, $2)', [author, title], error => {
+    if (error) {
+      throw error
+    }
+    response.status(201).json({ status: 'success', message: 'Book added.' })
+  })
+}
+
+app
+  .route('/lists')
+  // GET endpoint
+  .get(getLists)
+  // POST endpoint
+  .post(addList)
+
+// Start server
+app.listen(process.env.PORT || 3002, () => {
+  console.log(`Server listening`)
 })
