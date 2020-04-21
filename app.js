@@ -9,34 +9,20 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
-const getBooks = (request, response) => {
-  pool.query('SELECT * FROM books', (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
+app.get('/', function (req, res) {
+    res.send('Hello World!')
+})
+app.get('/lists', function (req, res) {
+    res.send('Hello World!')
+})
 
-const addBook = (request, response) => {
-  const { author, title } = request.body
+app.post('/lists', function (req, res) {
+    res.send('Got a POST request')
+})
 
-  pool.query('INSERT INTO books (author, title) VALUES ($1, $2)', [author, title], error => {
-    if (error) {
-      throw error
-    }
-    response.status(201).json({ status: 'success', message: 'Book added.' })
-  })
-}
 
-app
-  .route('/lists')
-  // GET endpoint
-  .get(getLists)
-  // POST endpoint
-  .post(addList)
 
 // Start server
 app.listen(process.env.PORT || 3002, () => {
-  console.log(`Server listening`)
+    console.log(`Server listening`)
 })
