@@ -51,7 +51,16 @@ app.get('/lists/:id', async (req, res) => {
 })
 
 // Update a list
-
+app.put('/lists/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        const { list_name }  = req.body
+        const updateList = await pool.query("UPDATE lists SET list_name = $1 WHERE list_id = $2", [list_name, id])
+        res.json("List name is updated")
+    } catch (err) {
+        console.log(err.message)
+   }
+})
 // Delete a list
 
 //app.use('/lists', listsRouter)
