@@ -39,6 +39,16 @@ app.get('/lists', async (req, res) => {
 })
 
 // get a list
+app.get('/lists/:id', async (req, res) => {
+    try {
+        //console.log(req.params)
+        const { id } = req.params
+        const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
+        res.json(list.rows[0])
+    } catch (err) {
+        console.log(err.message)
+   }
+})
 
 // Update a list
 
