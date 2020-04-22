@@ -21,15 +21,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.post('/lists', async (req, res) => {
     try {
         const { list_name }  = req.body
-        console.log(list_name)
         const newList = await pool.query("INSERT INTO lists (list_name) VALUES ($1) RETURNING *", [list_name])
-        res.json(newList)
-    } catch (error) {
-        console.log(error.message)
+        res.json(newList.rows[0])
+    } catch (err) {
+        console.log(err.message)
    }
 })
 
 // get all lists
+app.get('/lists', async (req, res) => {
+    try {
+        const allLists = await pool.query("SELECT * FROM lists")
+        res.json(allLists.rows)
+    } catch (err) {
+        console.log(err.message)
+   }
+})
 
 // get a list
 
