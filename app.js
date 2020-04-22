@@ -1,25 +1,18 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+const path = require('path')
 const cors = require('cors')
-const { pool } = require('./config')
+
+const listsRouter = require('./routes/lists')
 
 const app = express()
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+// view engine setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
-    res.send('Hello World!')
-})
-app.get('/lists', function (req, res) {
-    res.send('Hello World!')
-})
-
-app.post('/lists', function (req, res) {
-    res.send('Got a POST request')
-})
-
+app.use('/', listsRouter)
+app.use('/lists', listsRouter)
 
 
 // Start server
