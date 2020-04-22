@@ -22,7 +22,7 @@ app.post('/lists', async (req, res) => {
     try {
         const { list_name }  = req.body
         console.log(list_name)
-        const newList = await pool.query("INSERT INTO lists (list_name) VALUES ($1)", [list_name])
+        const newList = await pool.query("INSERT INTO lists (list_name) VALUES ($1) RETURNING *", [list_name])
         res.json(newList)
     } catch (error) {
         console.log(error.message)
