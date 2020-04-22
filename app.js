@@ -63,6 +63,16 @@ app.put('/lists/:id', async (req, res) => {
 })
 // Delete a list
 
+app.delete('/lists/:id', async (req, res) => {
+    try {
+        const {id} = req.params
+        const deleteList = await pool.query("DELETE FROM lists WHERE list_id = $1", [id])
+        res.json("List is deleted")
+    } catch (err) {
+        console.log(err.message)
+   }
+})
+
 //app.use('/lists', listsRouter)
 
 
