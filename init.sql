@@ -3,7 +3,7 @@ CREATE TABLE lists(
     list_name VARCHAR(255) NOT NULL
 )
 
-INSERT INTO lists (list_name) VALUES ('Shopping of book')
+-- INSERT INTO lists (list_name) VALUES ('Shopping of book')
 
 -- CREATE TABLE tasks(
 --     task_id SERIAL PRIMARY KEY NOT NULL,
