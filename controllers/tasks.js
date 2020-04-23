@@ -1,13 +1,14 @@
 const { pool } = require('../config')
 
-// exports.get_tasks = async (req, res) => {
-//     try {
-//         const allLists = await pool.query("SELECT * FROM lists")
-//         res.json(allLists.rows)
-//     } catch (err) {
-//         console.log(err.message)
-//    }
-// }
+exports.get_tasks = async (req, res) => {
+    try {
+        const { id } = req.params
+        const tasks = await pool.query("SELECT * FROM tasks WHERE list_id = $1", [id])
+        res.json(tasks.rows)
+    } catch (err) {
+        console.log(err.message)
+   }
+}
 
 exports.add_task = async (req, res) => {
     try {
