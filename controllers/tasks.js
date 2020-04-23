@@ -53,12 +53,16 @@ exports.update_task = async (req, res) => {
    }
 }
 
-// exports.delete_list = async (req, res) => {
-//     try {
-//         const {id} = req.params
-//         const deleteList = await pool.query("DELETE FROM lists WHERE list_id = $1", [id])
-//         res.json("List is deleted")
-//     } catch (err) {
-//         console.log(err.message)
-//    }
-// }
+exports.delete_task = async (req, res) => {
+    try {
+        const {id} = req.params
+        const {tid} = req.params
+
+        const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
+
+        const deleteTask = await pool.query("DELETE FROM tasks WHERE task_id = $1", [tid])
+        res.json("List is deleted")
+    } catch (err) {
+        console.log(err.message)
+   }
+}

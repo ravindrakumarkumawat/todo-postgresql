@@ -7,6 +7,6 @@ const tasks =  require('../controllers/tasks')
 router.post('/', tasks.add_task)
 // router.get('/:id', tasks.get_task)
 router.put('/:tid', tasks.update_task)
-// router.delete('/:tid', tasks.delete_task)
+router.delete('/:tid', tasks.delete_task)
 
 module.exports = router
