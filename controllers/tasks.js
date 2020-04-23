@@ -66,3 +66,14 @@ exports.delete_task = async (req, res) => {
         console.log(err.message)
    }
 }
+
+exports.delete_completed_task = async (req, res) => {
+    try {
+        const {id} = req.params
+
+        const deleteTask = await pool.query("DELETE FROM tasks WHERE completed = true AND list_id = $1", [id])
+        res.json("Completed List is deleted")
+    } catch (err) {
+        console.log(err.message)
+   }
+}
