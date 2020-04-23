@@ -3,8 +3,15 @@ const { pool } = require('../config')
 exports.get_tasks = async (req, res) => {
     try {
         const { id } = req.params
-        const tasks = await pool.query("SELECT * FROM tasks WHERE list_id = $1", [id])
-        res.json(tasks.rows)
+        //const tasks = await pool.query("SELECT * FROM tasks WHERE list_id = $1", [id])
+
+        const tasks_order = await pool.query(`SELECT * FROM (SELECT * FROM 
+            (SELECT * FROM (SELECT * FROM tasks WHERE list_id = ${id} ORDER BY task_id)
+              AS or_taskid ORDER BY task_scheduled)
+                AS or_scheduled ORDER BY priority DESC)
+                  AS or_priority ORDER BY completed;`)
+        //res.json(tasks.rows)
+        res.json(tasks_order.rows)
     } catch (err) {
         console.log(err.message)
    }
