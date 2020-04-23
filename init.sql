@@ -14,7 +14,9 @@ CREATE TABLE tasks
     completed boolean DEFAULT FALSE,
     priority INTEGER DEFAULT 0,
     note text,
-    list_id SERIAL REFERENCES lists (list_id)
+    list_id INTEGER REFERENCES lists (list_id)
 )
+
+-- UPDATE tasks SET list_id = 1 WHERE task_id = 3;
 
 ALTER TABLE tasks ADD CONSTRAINT tasks_list_id_fkey FOREIGN KEY (list_id) REFERENCES lists (list_id) ON DELETE CASCADE
