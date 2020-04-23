@@ -20,4 +20,4 @@ CREATE TABLE tasks
 
 -- UPDATE tasks SET list_id = 1 WHERE task_id = 3;
 
-ALTER TABLE tasks ADD CONSTRAINT tasks_list_id_fkey FOREIGN KEY (list_id) REFERENCES lists (list_id) ON DELETE CASCADE
+-- ALTER TABLE tasks ADD CONSTRAINT tasks_list_id_fkey FOREIGN KEY (list_id) REFERENCES lists (list_id) ON DELETE CASCADE
