@@ -35,16 +35,23 @@ exports.add_task = async (req, res) => {
 //    }
 // }
 
-// exports.update_list = async (req, res) => {
-//     try {
-//         const {id} = req.params
-//         const { list_name }  = req.body
-//         const updateList = await pool.query("UPDATE lists SET list_name = $1 WHERE list_id = $2", [list_name, id])
-//         res.json("List name is updated")
-//     } catch (err) {
-//         console.log(err.message)
-//    }
-// }
+exports.update_task = async (req, res) => {
+    try {
+        const {id} = req.params
+        const {tid} = req.params
+        console.log(id, tid)
+
+        const { task_name }   = req.body
+        console.log(task_name)
+
+        const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
+        
+        const updateTask = await pool.query("UPDATE tasks SET task_name = $1 WHERE task_id = $2", [task_name, tid])
+        res.json("List name is updated")
+    } catch (err) {
+        console.log(err.message)
+   }
+}
 
 // exports.delete_list = async (req, res) => {
 //     try {
