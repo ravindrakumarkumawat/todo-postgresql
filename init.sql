@@ -14,7 +14,8 @@ CREATE TABLE tasks
     completed boolean DEFAULT FALSE,
     priority INTEGER DEFAULT 0,
     note text,
-    list_id INTEGER REFERENCES lists (list_id)
+    list_id INTEGER
+    -- list_id INTEGER REFERENCES lists (list_id)
 )
 
 -- UPDATE tasks SET list_id = 1 WHERE task_id = 3;
