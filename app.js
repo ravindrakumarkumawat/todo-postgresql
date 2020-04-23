@@ -3,6 +3,7 @@ const path = require('path')
 const cors = require('cors')
 
 const listsRouter = require('./routes/lists')
+const taskRouter = require('./routes/tasks')
 
 const app = express()
 
@@ -16,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTES
 app.use('/lists', listsRouter)
+app.use('/lists/:id/tasks', taskRouter)
 
 // Start server
 app.listen(process.env.PORT || 5000, () => {
