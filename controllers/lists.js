@@ -3,7 +3,9 @@ const { pool } = require('../config')
 exports.get_lists = async (req, res) => {
     try {
         const allLists = await pool.query("SELECT * FROM lists")
-        res.json(allLists.rows)
+        console.log(req.params)
+        res.render('lists', {data: {lists: allLists.rows}})
+        //res.json(allLists.rows)
     } catch (err) {
         console.log(err.message)
    }
