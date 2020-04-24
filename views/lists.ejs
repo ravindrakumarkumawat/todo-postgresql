@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+    <title>Todo APP</title>
 </head>
-<body>
-    <div>
-        <h1>Lists</h1>
-       <ul>
-          <% data.lists.forEach(list => { %>
-          <li><%= list.list_name %> </li>
-          <% }) %>
-       </ul>
+<body>   
+
+    <h1 class="title">ToDo App: PostgreSQL</h1>
+    <!-- List Container -->
+    <div class="all-tasks" data-list-display-container>
+        <h2 class="task-list-title">My List</h2>
+        <form action="/lists" id="newListForm" data-new-list-form method="POST">
+            <input type="text" id="newListInput" placeholder="Search | Create a List" class="new list" data-new-list-input required="true">
+            <button class="btn create" id="add-list" type="submit">+</button>
+        </form>
+        <ul class="task-list" data-lists>
+            <% data.lists.forEach(list => { %>
+                <li><%= list.list_name %> </li>
+            <% }) %>
+        </ul>
+
     </div>
 </body>
 </html>
