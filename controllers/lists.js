@@ -2,8 +2,7 @@ const { pool } = require('../config')
 
 exports.get_lists = async (req, res) => {
     try {
-        const allLists = await pool.query("SELECT * FROM lists")
-        console.log(req.params)
+        const allLists = await pool.query("SELECT * FROM lists ORDER BY list_id desc")
         res.render('lists', {data: {lists: allLists.rows}})
         //res.json(allLists.rows)
     } catch (err) {
@@ -15,7 +14,8 @@ exports.add_list = async (req, res) => {
     try {
         const { list_name }  = req.body
         const newList = await pool.query("INSERT INTO lists (list_name) VALUES ($1) RETURNING *", [list_name])
-        res.json(newList.rows[0])
+        const allLists = await pool.query("SELECT * FROM lists ORDER BY list_id desc")
+        res.render('lists', {data: {lists: allLists.rows}})
     } catch (err) {
         console.log(err.message)
    }
