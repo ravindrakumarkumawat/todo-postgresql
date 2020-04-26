@@ -6,7 +6,7 @@
     font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     color: #444;
-    background-color: #f65c65;
+    background-color: #007bff;
     /* background-image: url(back.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
@@ -50,7 +50,7 @@
   }
 
   .all-tasks{
-    width: 800px;
+    width: 600px;
     max-width: 100%;
     min-height: 100px; 
     margin: 20px auto 50px;
@@ -65,7 +65,7 @@
   }
 
   .todo-list{
-    width: 800px;
+    width: 600px;
     max-width: 100%;
     min-height: 100px;
     margin: 20px auto 50px;
@@ -98,18 +98,18 @@
 
   .todo-title{
     font-size: 1.2em;
-    color: #f65c65;
+    color: #007bff;
     font-weight: normal;
   }
 
   .active-list{
     font-size:1.1em;
-    color: #f65c65;
+    color: #007bff;
     font-weight: normal;
   }
   .active-task{
     font-size:1.1em;
-    color: #f65c65;
+    color: #007bff;
     font-weight: normal;
   }
   
@@ -133,13 +133,13 @@
     font-size: 1em;
   }
   .btn {
-      background-color: lightcoral;
+      background-color: #007bff;
       color: #ddd
   }  
   
   input {
     border: 1px solid #ddd; 
-    min-width: 80%;
+    min-width: 90%;
   }
 
   select {
@@ -219,7 +219,7 @@ li {
 
 .list-title {
   margin: 0 1em 0 0;
-  color:#f65c65;
+  color:#007bff;
   cursor: pointer;
 }
 .list-title:hover {
@@ -228,7 +228,7 @@ li {
 
 .task-title {
   margin: 0 1em 0 0;
-  color:#f65c65;
+  color:#007bff;
   cursor: pointer;
 }
 .task-title:hover {
@@ -238,7 +238,7 @@ li {
 .task-count {
   margin: 0;
   font-size: 0.8rem;
-  color: #f65c65;
+  color: #007bff;
 }
 .task-count:hover {
   opacity: 0.7;
