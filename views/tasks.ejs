@@ -1,12 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
-    <title>Todo APP</title>
-</head>
-<body>   
+<%- include ('common/header') %>
 
-</body>
-</html>
+    <!-- Task Container -->
+    <div class="todo-list" id="taskDisplayContainer" data-task-display-container>
+
+        <div class="todo-header" data-todo-header>
+            <h2 class="list-title" id="listTitleElement" data-list-title></h2>
+            <p class="task-count" id="listCountElement" data-list-count></p>
+        </div>
+        <div>
+            <form action="" id="newEditForm" data-edit-list>
+                <input type="text" class="edit" id="input-update" placeholder="Edit List Name" data-updated-list-name>
+                <button class="btn create" id="update-list" data-update-list>Edit</button>
+            </form>
+        </div>
+
+        <div class="todo-body">
+
+            <div class="new-task-creator">
+                <form action="" id="newTaskForm" data-new-task-form>
+                    <input type="text" class="new task" id="input-item" placeholder="Search | Add Task Item" data-new-task-input>
+                    <button class="btn create" id="add-item">+</button>
+                </form>
+            </div>
+
+            <div class="tasks" data-tasks id="tasksContainer">
+            </div>
+
+            <div class="delete-stuff">
+                <button class="btn" id="clear-task" data-clear-complete-tasks-button>Clear Completed
+                    Task</button>
+                <button class="btn" id="delete-task" data-delete-list-button>Delete List</button>
+                <button class="btn" id="back-task" data-back-list-button>Back</button>
+            </div>
+
+        </div>
+    </div>
+
+<%- include ('common/footer') %>
+    

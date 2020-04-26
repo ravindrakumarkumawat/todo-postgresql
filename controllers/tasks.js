@@ -11,7 +11,8 @@ exports.get_tasks = async (req, res) => {
                 AS or_scheduled ORDER BY priority DESC)
                   AS or_priority ORDER BY completed;`)
         //res.json(tasks.rows)
-        res.json(tasks_order.rows)
+        res.render('tasks')
+        //res.json(tasks_order.rows)
     } catch (err) {
         console.log(err.message)
    }
