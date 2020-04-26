@@ -8,6 +8,7 @@ router.post('/', lists.add_list)
 router.get('/:id', lists.get_list)
 // router.put('/:id', lists.update_list)
 router.post('/:id', lists.update_list)
-router.delete('/:id', lists.delete_list)
-
+//router.delete('/:id', lists.delete_list)
+router.get('/:id/delete', lists.delete_list)
+//router.post('/delete/:id', lists.delete_list)
 module.exports = router

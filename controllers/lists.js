@@ -47,9 +47,11 @@ exports.update_list = async (req, res) => {
 
 exports.delete_list = async (req, res) => {
     try {
+        // res.send(req.params)
         const {id} = req.params
         const deleteList = await pool.query("DELETE FROM lists WHERE list_id = $1", [id])
-        res.json("List is deleted")
+        res.redirect('/lists')
+        //res.json("List is deleted")
     } catch (err) {
         console.log(err.message)
    }
