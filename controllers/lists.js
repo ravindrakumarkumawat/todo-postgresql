@@ -27,7 +27,8 @@ exports.get_list = async (req, res) => {
         //console.log(req.params)
         const { id } = req.params
         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
-        res.json(list.rows[0])
+        res.render('editList', {data: {list:list.rows[0]}})
+        //res.json(list.rows[0].list_name)
     } catch (err) {
         console.log(err.message)
    }
@@ -38,7 +39,7 @@ exports.update_list = async (req, res) => {
         const {id} = req.params
         const { list_name }  = req.body
         const updateList = await pool.query("UPDATE lists SET list_name = $1 WHERE list_id = $2", [list_name, id])
-        res.json("List name is updated")
+        res.redirect('/lists')
     } catch (err) {
         console.log(err.message)
    }

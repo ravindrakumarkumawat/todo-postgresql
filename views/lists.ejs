@@ -19,7 +19,7 @@
         <ul class="task-list" data-lists>
             <% data.lists.forEach(list => { %>
                 <li><%= list.list_name %> 
-                    <a href="https://facebook.com" style="padding-left: 20px;">Edit</a>
+                    <a href="/lists/<%=list.list_id%>" style="padding-left: 20px;">Edit</a>
                     <a href="/lists/<%=list.list_id%>/tasks" style="float: right;">Details</a>
                 </li> 
 

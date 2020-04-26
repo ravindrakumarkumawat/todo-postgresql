@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <title>Todo APP</title>
+</head>
+
+<body>
+    <h1 class="title">ToDo App: PostgreSQL</h1>
+    <!-- List Container -->
+    <div class="all-tasks" data-list-display-container>
+        <h2 class="task-list-title">Edit List</h2>
+        <!-- action="/ideas/{{idea.id}}?_method=PUT" method="post" -->
+        <form action="/lists/<%=data.list.list_id%>" id="newListForm" data-new-list-form method="POST">
+            <input type="text" id="newListInput" placeholder="Search | Create a List" class="new list"
+                data-new-list-input required="true" name="list_name" value="<%=data.list.list_name%>">
+            <button class="btn create" id="add-list" type="submit">Edit</button>
+        </form>
+    </div>
+</body>
+
+</html>
