@@ -15,9 +15,9 @@
         <h2 class="task-list-title">Edit List</h2>
         <!-- action="/ideas/{{idea.id}}?_method=PUT" method="post" -->
         <form action="/lists/<%=data.list.list_id%>" id="newListForm" data-new-list-form method="POST">
-            <input type="text" id="newListInput" placeholder="Search | Create a List" class="new list"
+            <input type="text" id="newListInput" class="new list"
                 data-new-list-input required="true" name="list_name" value="<%=data.list.list_name%>">
-            <button class="btn create" id="add-list" type="submit">Edit</button>
+            <!-- <button class="btn create" id="add-list" type="submit">Edit</button> -->
         </form>
     </div>
 </body>
