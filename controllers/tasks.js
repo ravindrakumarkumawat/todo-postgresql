@@ -31,23 +31,25 @@ exports.add_task = async (req, res) => {
                 AS or_scheduled ORDER BY priority DESC)
                   AS or_priority ORDER BY completed;`)
         //res.render('tasks', {data: {tasks: allTasks.rows}})
-        res.redirect('tasks')
+        // res.redirect('tasks')
+        res.redirect('/lists/'+id+'/tasks')
     } catch (err) {
         console.log(err.message)
    }
 }
 
 
-// exports.get_list = async (req, res) => {
-//     try {
-//         //console.log(req.params)
-//         const { id } = req.params
-//         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
-//         res.json(list.rows[0])
-//     } catch (err) {
-//         console.log(err.message)
-//    }
-// }
+exports.get_task = async (req, res) => {
+    try {
+        //console.log(req.params)
+        const { id } = req.params
+        const { tid } = req.params
+        const task = await pool.query("SELECT * FROM tasks WHERE list_id = $1 AND task_id = $2", [id, tid])
+        res.render('editTask',{data: {task:task.rows[0]}})
+    } catch (err) {
+        console.log(err.message)
+   }
+}
 
 exports.update_task = async (req, res) => {
     try {
@@ -74,8 +76,9 @@ exports.delete_task = async (req, res) => {
 
         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
 
-        const deleteTask = await pool.query("DELETE FROM tasks WHERE task_id = $1", [tid])
-        res.json("List is deleted")
+        const deleteTask = await pool.query("DELETE FROM tasks WHERE task_id = $1 AND list_id = $2", [tid, id])
+        //res.json("List is deleted")
+        res.redirect('/lists/'+id+'/tasks')
     } catch (err) {
         console.log(err.message)
    }

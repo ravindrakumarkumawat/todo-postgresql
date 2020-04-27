@@ -1,0 +1,13 @@
+<%- include ('common/header') %>
+    <!--Edit List Container -->
+    <div class="all-tasks" data-list-display-container>
+        <h2 class="task-list-title">Edit Task</h2>
+        <!-- action="/ideas/{{idea.id}}?_method=PUT" method="post" -->
+        <form action="" id="newListForm" data-new-list-form method="POST">
+            <input type="text" id="newListInput" class="new list"
+                data-new-list-input required="true" name="list_name" value="">
+            <!-- <button class="btn create" id="add-list" type="submit">Edit</button> -->
+        </form>
+    </div>
+    
+<%- include ('common/footer') %>
