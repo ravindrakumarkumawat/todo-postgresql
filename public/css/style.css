@@ -258,6 +258,7 @@ p {
 
 
 .delete-stuff {
+  padding-top: 30px;
   display: flex;
   justify-content: space-evenly;
   position: relative;
