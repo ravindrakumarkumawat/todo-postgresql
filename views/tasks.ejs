@@ -1,40 +1,41 @@
-<%- include ('common/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <title>Todo APP</title>
+</head>
+<body>   
+
+    <h1 class="title">ToDo App: PostgreSQL</h1>
 
     <!-- Task Container -->
     <div class="todo-list" id="taskDisplayContainer" data-task-display-container>
 
-        <div class="todo-header" data-todo-header>
-            <h2 class="list-title" id="listTitleElement" data-list-title></h2>
-            <p class="task-count" id="listCountElement" data-list-count></p>
-        </div>
-        <div>
-            <form action="" id="newEditForm" data-edit-list>
-                <input type="text" class="edit" id="input-update" placeholder="Edit List Name" data-updated-list-name>
-                <button class="btn create" id="update-list" data-update-list>Edit</button>
-            </form>
-        </div>
-
         <div class="todo-body">
-
             <div class="new-task-creator">
-                <form action="" id="newTaskForm" data-new-task-form>
-                    <input type="text" class="new task" id="input-item" placeholder="Search | Add Task Item" data-new-task-input>
-                    <button class="btn create" id="add-item">+</button>
+                <form action="/lists/<%=data.id%>/tasks" id="newTaskForm" data-new-task-form method="POST">
+                    <input type="text" class="new task" id="input-item" placeholder="Search | Add Task Item" data-new-task-input name="task_name" required="true">
+                    <button class="btn create" id="add-item" type="submit" style="float: right;">+</button>
                 </form>
             </div>
 
-            <div class="tasks" data-tasks id="tasksContainer">
-            </div>
-
-            <div class="delete-stuff">
-                <button class="btn" id="clear-task" data-clear-complete-tasks-button>Clear Completed
-                    Task</button>
-                <button class="btn" id="delete-task" data-delete-list-button>Delete List</button>
-                <button class="btn" id="back-task" data-back-list-button>Back</button>
-            </div>
+            <ul class="tasks list-group list-group-flush" data-tasks id="tasksContainer">
+                
+                <% data.tasks.forEach(task => { %>
+                    <li class="list-group-item" style="padding:0px">
+                        <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="option1" aria-label="..."><%= task.task_name %></li>  
+                <% }) %>
+            </ul>
 
         </div>
     </div>
 
-<%- include ('common/footer') %>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
     

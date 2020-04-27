@@ -11,8 +11,7 @@ exports.get_tasks = async (req, res) => {
                 AS or_scheduled ORDER BY priority DESC)
                   AS or_priority ORDER BY completed;`)
         //res.json(tasks.rows)
-        res.render('tasks')
-        //res.json(tasks_order.rows)
+        res.render('tasks',{data: { tasks: tasks_order.rows, id: id}})
     } catch (err) {
         console.log(err.message)
    }
@@ -26,7 +25,13 @@ exports.add_task = async (req, res) => {
         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
         // console.log(list.rows[0])
         const newTask = await pool.query("INSERT INTO TASKS (task_name, list_id) VALUES ($1, $2) RETURNING *", [task_name, id])
-        res.send(newTask.rows)
+        const allTasks = await pool.query(`SELECT * FROM (SELECT * FROM 
+            (SELECT * FROM (SELECT * FROM tasks WHERE list_id = ${id} ORDER BY task_id)
+              AS or_taskid ORDER BY task_scheduled)
+                AS or_scheduled ORDER BY priority DESC)
+                  AS or_priority ORDER BY completed;`)
+        //res.render('tasks', {data: {tasks: allTasks.rows}})
+        res.redirect('tasks')
     } catch (err) {
         console.log(err.message)
    }
