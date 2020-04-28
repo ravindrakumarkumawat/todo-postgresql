@@ -55,15 +55,72 @@ exports.update_task = async (req, res) => {
     try {
         const {id} = req.params
         const {tid} = req.params
-        console.log(id, tid)
-
+        // console.log(id, tid)
         const { task_name }   = req.body
-        console.log(task_name)
+        // console.log(task_name)
 
         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
         
-        const updateTask = await pool.query("UPDATE tasks SET task_name = $1 WHERE task_id = $2", [task_name, tid])
-        res.json("List name is updated")
+        const updateTask = await pool.query("UPDATE tasks SET task_name = $1 WHERE task_id = $2 AND list_id = $3", [task_name, tid, id])
+        res.redirect('/lists/'+id+'/tasks')
+    } catch (err) {
+        console.log(err.message)
+   }
+}
+
+exports.task_priority = async (req, res) => {
+    try {
+        const {id} = req.params
+        const {tid} = req.params
+        
+        const task = await pool.query("SELECT * FROM tasks WHERE list_id = $1 AND task_id = $2", [id, tid])
+
+        res.render('priorityTask', {data: {task:task.rows[0]}})
+    } catch (err) {
+        console.log(err.message)
+   }
+}
+
+exports.edit_priority = async (req, res) => {
+    try {
+        const {id} = req.params
+        const {tid} = req.params
+        
+        const task = await pool.query("SELECT * FROM tasks WHERE list_id = $1 AND task_id = $2", [id, tid])
+
+        res.render('priorityEdit', {data: {task:task.rows[0]}})
+    } catch (err) {
+        console.log(err.message)
+   }
+}
+
+
+exports.update_task_priority = async (req, res) => {
+    try {
+        const {id} = req.params
+        const {tid} = req.params
+
+        const { note, date, select } = req.body
+        
+        await pool.query("UPDATE tasks SET note = $1 WHERE list_id = $2 AND task_id = $3", [note, id, tid])
+        
+        if(date.length !== 0) await pool.query("UPDATE tasks SET task_scheduled = $1 WHERE list_id = $2 AND task_id = $3", [date, id, tid])
+        
+        let priority = 0
+        if(select === 'low') {
+           priority = 1
+           await pool.query("UPDATE tasks SET priority = $1 WHERE list_id = $2 AND task_id = $3", [priority, id, tid])
+        } else if(select === 'medium') {
+            priority = 2
+            await pool.query("UPDATE tasks SET priority = $1 WHERE list_id = $2 AND task_id = $3", [priority, id, tid])
+        } else if (select === 'high') {
+            priority = 3
+            await pool.query("UPDATE tasks SET priority = $1 WHERE list_id = $2 AND task_id = $3", [priority, id, tid])
+        } else {
+            await pool.query("UPDATE tasks SET priority = $1 WHERE list_id = $2 AND task_id = $3", [priority, id, tid])
+        }
+        
+        res.redirect('/lists/'+id+'/tasks/'+tid+'/priority')
     } catch (err) {
         console.log(err.message)
    }
@@ -77,7 +134,6 @@ exports.delete_task = async (req, res) => {
         const list = await pool.query("SELECT * FROM lists WHERE list_id = $1", [id])
 
         const deleteTask = await pool.query("DELETE FROM tasks WHERE task_id = $1 AND list_id = $2", [tid, id])
-        //res.json("List is deleted")
         res.redirect('/lists/'+id+'/tasks')
     } catch (err) {
         console.log(err.message)

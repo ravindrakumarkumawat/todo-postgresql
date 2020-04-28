@@ -10,25 +10,36 @@
 <body>   
 
     <h1 class="title">ToDo App: PostgreSQL</h1>
-    <!--Edit Task Container -->
-    <div class="all-tasks" data-list-display-container>
-        <h2 class="task-list-title">Edit Task</h2>
-        
-        <form action="/lists/<%=data.task.list_id%>/tasks/<%=data.task.task_id%>" id="newListForm" method="POST" id="newTaskForm" data-edit-task>
 
-            <input type="text" id="input-updated-task" class="edit" placeholder="Edit Task Name" data-updated-task-name required="true" name="task_name" value="<%=data.task.task_name%>">
-            <!-- <div class="delete-stuff-priority">
-                <button class="btn add" id="add-task-priority" data-add-task-priority type="submit">Update</button>
-            </div>       -->
-
-       </form>
+    <div class="all-tasks tasks form" data-tasks-priority id="priority">
+        <h2 class="task-list-title">Edit priority Task</h2>
+        <div class="tasks form" data-tasks-priority id="priority">
       
+       <form action="/lists/<%=data.task.list_id%>/tasks/<%=data.task.task_id%>/priority" method="post">
+            Note: <br> <textarea name="note" id="noteText" cols="62" rows="10"placeholder="Write something" data-note-text><%=data.task.note%>
+            </textarea></br>
 
-       <a href="/lists/<%=data.task.list_id%>/tasks" class="btn" id="back-task" data-back-list-button>Back</a>
+
+            Date: <input type="date" name="date" id="date" data-date-priority> <br>
+
+            Priority: <select name="select" id="select" data-select-priority>
+                <option value="none">None</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+        <button class="btn add" id="add-task-priority" data-add-task-priority type="submit">Update</button>
+    </form>
+
+      <a href="/lists/<%=data.task.list_id%>/tasks" class="btn" id="back-task" data-back-list-button>Back</a>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+   
