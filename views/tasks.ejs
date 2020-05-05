@@ -15,7 +15,7 @@
                 
                 <% data.tasks.forEach(task => { %>
                     <li class="list-group-item" > 
-                        <input type="checkbox" name="checked" id="<%=task.task_id%>" aria-checked="true">                       
+                        <input type="checkbox" name="checked" id="<%=task.task_id%>" aria-checked="true" <%= task.completed ? "checked": "" %> >                         
                        <%= task.task_name %>
 
                     <a href="/lists/<%=task.list_id%>/tasks/<%=task.task_id%>/priority" style="float: right; padding-left: 20px;">
